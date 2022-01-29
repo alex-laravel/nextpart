@@ -31,7 +31,7 @@ class BrandController extends Controller
     public function show($brandAddressId)
     {
         $brandAddress = BrandAddress::find($brandAddressId);
-        $brand = Brand::find($brandAddress->brandId);
+        $brand = Brand::where('brandId', $brandAddress->brandId)->first();
 
         return view('backend.tecdoc-brands.show', [
             'brand' => $brand,
