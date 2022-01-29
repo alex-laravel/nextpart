@@ -1,0 +1,11 @@
+@import 'themes';
+
+$header-variant-name: spaceship-one;
+
+@if (mixin_exists(define-header-variables)) {
+    @include define-header-variables($header-variant-name);
+}
+
+
+
+@import 'style.header';

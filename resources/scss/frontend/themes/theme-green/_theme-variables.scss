@@ -1,0 +1,49 @@
+$theme-color: #006847;
+
+
+$theme-scheme: () !default;
+$theme-scheme: map_merge((
+    main: $theme-color,
+    muted: #c3e5d4,
+), $theme-scheme);
+
+
+@mixin define-header-variables($header-variant-name) {
+    // ----------------------------------------
+    // -- classic-variant-two
+    // ----------------------------------------
+    @if ($header-variant-name == classic-two) {
+        // topbar
+        $topbar-classic-scheme: (
+            main: adjust-color($theme-color, $lightness: -3, $saturation: -3),
+        ) !global !default;
+
+        // logo
+        $logo-scheme: (
+            primary:   rgba(#fff, .9),
+            secondary: rgba(#fff, .6),
+        ) !global !default;
+    }
+
+    // ----------------------------------------
+    // -- classic-variant-four
+    // ----------------------------------------
+    @if ($header-variant-name == classic-four) {
+        // logo
+        $logo-scheme: (
+            primary:   rgba(#fff, .9),
+            secondary: rgba(#fff, .6),
+        ) !global !default;
+    }
+
+    // ----------------------------------------
+    // -- mobile-variant-two
+    // ----------------------------------------
+    @if ($header-variant-name == mobile-two) {
+        // logo
+        $logo-scheme: (
+            primary:   rgba(#fff, .9),
+            secondary: rgba(#fff, .6),
+        ) !global !default;
+    }
+}

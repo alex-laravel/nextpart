@@ -1,0 +1,67 @@
+/*
+// .block-teammates
+*/
+@import '../variables';
+@import '../mixins/breakpoints';
+
+
+.block-teammates {}
+.block-teammates__title {
+    font-size: 32px;
+    font-weight: $font-weight-bold;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.block-teammates__subtitle {
+    color: map_get($card-scheme, opposite-alt);
+    text-align: center;
+    margin-bottom: 32px;
+    font-size: 15px;
+    margin-top: -36px;
+}
+.block-teammates__list {
+    display: flex;
+
+    .owl-stage-outer {
+        margin: -10px;
+        padding: 10px;
+    }
+    .owl-dots {
+        margin-top: 18px;
+        display: flex;
+        justify-content: center;
+    }
+    .owl-carousel button.owl-dot {
+        &:before {
+            display: block;
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background: $body-carousel-dot-normal-color;
+            transition: background .2s;
+            margin: 6px;
+        }
+        &:focus {
+            outline: none;
+        }
+        &:hover:before {
+            background: $body-carousel-dot-hover-color;
+        }
+        &.active:before {
+            background: $body-carousel-dot-active-color;
+        }
+    }
+}
+.block-teammates__item {
+    flex-shrink: 0;
+    max-width: 240px;
+    margin: 0 auto;
+}
+
+
+@include media-breakpoint-down(sm) {
+    .block-teammates__list {
+        padding: 0 10px;
+    }
+}

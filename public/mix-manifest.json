@@ -1,0 +1,16 @@
+{
+    "/js/auth.js": "/js/auth.js",
+    "/js/frontend.core.js": "/js/frontend.core.js",
+    "/js/frontend.main.js": "/js/frontend.main.js",
+    "/js/frontend.number.js": "/js/frontend.number.js",
+    "/js/backend.js": "/js/backend.js",
+    "/js/backend.sweetalert2.js": "/js/backend.sweetalert2.js",
+    "/css/frontend.core.css": "/css/frontend.core.css",
+    "/css/auth.css": "/css/auth.css",
+    "/css/frontend.mobile.css": "/css/frontend.mobile.css",
+    "/css/frontend.header.css": "/css/frontend.header.css",
+    "/css/frontend.main.css": "/css/frontend.main.css",
+    "/css/backend.css": "/css/backend.css",
+    "/css/backend.datatable.css": "/css/backend.datatable.css",
+    "/js/backend.datatable.js": "/js/backend.datatable.js"
+}

@@ -1,0 +1,55 @@
+/*
+// .filter-vehicle
+*/
+@import '../variables';
+@import '../mixins/direction';
+
+
+$local-margin: 8px;
+
+
+.filter-vehicle {}
+.filter-vehicle__list {
+    margin: -$local-margin 0;
+    padding: 0;
+    list-style: none;
+}
+.filter-vehicle__item-label {
+    padding: 1px 0;
+    cursor: pointer;
+    display: flex;
+    margin: $local-margin 0;
+}
+.filter-vehicle__item-input {
+    flex-shrink: 0;
+
+    @include direction {
+        #{$margin-inline-end}: 7px;
+    }
+}
+.filter-vehicle__item-title {
+    padding: 1px 0;
+    font-size: 14px;
+    line-height: 16px;
+    flex-grow: 1;
+}
+.filter-vehicle__item-counter {
+    padding-top: 3px;
+    font-size: 12px;
+    line-height: 12px;
+    color: map_get($card-scheme, opposite-alt);
+
+    @include direction {
+        #{$margin-inline-start}: 12px;
+    }
+}
+.filter-vehicle__item--disabled {
+    cursor: default;
+
+    .filter-vehicle__item-title {
+        color: map_get($card-scheme, muted);
+    }
+}
+.filter-vehicle__button {
+    padding-top: 12px;
+}

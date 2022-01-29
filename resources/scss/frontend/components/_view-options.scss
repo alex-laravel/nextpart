@@ -1,0 +1,134 @@
+/*
+// .view-options
+*/
+@import '../variables';
+@import '../mixins/direction';
+@import '../mixins/breakpoints';
+
+
+.view-options {
+    font-size: .9375rem;
+}
+.view-options__body {
+    padding: .75rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+
+    & + & {
+        border-top: 1px solid map_get($card-scheme, divider);
+    }
+}
+.view-options__body--filters {
+    padding: .875rem 1rem;
+}
+.view-options__label {
+    position: absolute;
+    background: map_get($card-scheme, main);
+    padding: 0 8px;
+    top: -5px;
+    font-size: 10px;
+    text-transform: uppercase;
+    line-height: 1;
+    color: map_get($card-scheme, muted);
+
+    @include direction {
+        #{$inset-inline-start}: 50%;
+        transform: translateX(#{-50% * $transform-direction});
+    }
+}
+.view-options__filters-button {
+    @include direction {
+        #{$margin-inline-end}: 1.25rem;
+    }
+}
+.view-options__layout {
+    @include direction {
+        #{$margin-inline-end}: 1.25rem;
+    }
+}
+.view-options__legend {
+    white-space: nowrap;
+
+    @include direction {
+        #{$margin-inline-end}: 1.25rem;
+    }
+}
+.view-options__spring {
+    flex-grow: 1;
+}
+.view-options__select {
+    display: flex;
+    align-items: center;
+
+    @include direction {
+        #{$margin-inline-start}: 20px;
+    }
+
+    & > label {
+        margin-bottom: 0;
+
+        @include direction {
+            #{$margin-inline-end}: 10px;
+        }
+    }
+}
+
+
+.view-options--offcanvas--mobile {
+    @include media-breakpoint-up(lg) {
+        .view-options__filters-button {
+            display: none;
+        }
+    }
+}
+
+
+@include media-breakpoint-down(md) {
+    .view-options__legend {
+        @include direction {
+            #{$margin-inline-end}: 0;
+            #{$margin-inline-start}: auto;
+        }
+    }
+    .view-options__spring {
+        width: 100%;
+        height: 8px;
+    }
+    .view-options__select {
+        @include direction {
+            #{$margin-inline-start}: auto;
+        }
+
+        & + & {
+            @include direction {
+                #{$margin-inline-start}: 20px;
+            }
+        }
+    }
+}
+@include media-breakpoint-down(xs) {
+    .view-options__legend {
+        width: 100%;
+        padding-top: 10px;
+    }
+    .view-options__select {
+        flex-direction: column;
+        align-items: flex-start;
+
+        @include direction {
+            #{$margin-inline-start}: 0;
+        }
+
+        & > label {
+            margin: 0 0 2px;
+        }
+    }
+    .view-options__layout {
+        @include direction {
+            #{$margin-inline-start}: auto;
+            #{$margin-inline-end}: 0;
+        }
+    }
+}

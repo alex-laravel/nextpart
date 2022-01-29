@@ -1,0 +1,20 @@
+/*
+// .filter-price
+*/
+@import '../variables';
+
+
+.filter-price {}
+.filter-price__slider {
+    margin-top: 6px;
+}
+.filter-price__title {
+    padding-top: 2px;
+    font-size: 14px;
+}
+.filter-price__title-button {
+    margin-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

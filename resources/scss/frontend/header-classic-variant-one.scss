@@ -1,0 +1,15 @@
+@import 'themes';
+
+$header-variant-name: classic-one;
+
+@if (mixin_exists(define-header-variables)) {
+    @include define-header-variables($header-variant-name);
+}
+
+
+
+$header-layout: classic !default;
+
+
+
+@import 'style.header';

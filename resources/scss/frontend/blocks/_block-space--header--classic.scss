@@ -1,0 +1,11 @@
+/*
+// .block-space
+*/
+@import '../variables';
+
+
+@if($header-layout == classic) {
+    .block-space--layout--spaceship-ledge-height {
+        display: none;
+    }
+}
