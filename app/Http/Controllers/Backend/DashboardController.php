@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 
 
 use App\Http\Controllers\Controller;
-use App\Models\TecDoc\Brand;
+use App\Models\TecDoc\Brand\Brand;
 use App\Models\TecDoc\Manufacturer\Manufacturer;
 use App\Models\TecDoc\ModelSeries\ModelSeries;
 use App\Models\TecDoc\Vehicle\Vehicle;

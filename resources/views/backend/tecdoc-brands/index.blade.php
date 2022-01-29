@@ -19,6 +19,13 @@
             <h4 class="d-inline-block">{{ trans('labels.general.synchronize') }}</h4>
 
             <div class="float-right">
+                <form class="form-horizontal" action="{{ route('backend.brands.sync-addresses') }}" method="post">
+                    @csrf
+                    <button class="btn btn-block btn-info" type="submit">{{ trans('buttons.general.synchronize_addresses') }}</button>
+                </form>
+            </div>
+
+            <div class="float-right mr-2">
                 <form class="form-horizontal" action="{{ route('backend.brands.sync-assets') }}" method="post">
                     @csrf
                     <button class="btn btn-block btn-info" type="submit">{{ trans('buttons.general.synchronize_assets') }}</button>
@@ -28,7 +35,7 @@
             <div class="float-right mr-2">
                 <form class="form-horizontal" action="{{ route('backend.brands.sync') }}" method="post">
                     @csrf
-                    <button class="btn btn-block btn-primary" type="submit">{{ trans('buttons.general.synchronize') }}</button>
+                    <button class="btn btn-block btn-info" type="submit">{{ trans('buttons.general.synchronize') }}</button>
                 </form>
             </div>
         </div>
@@ -36,7 +43,6 @@
         <div class="card-body">
         </div>
     </div>
-
 
     <div class="card card-accent-info mt-3">
         <div class="card-header">
@@ -53,8 +59,9 @@
                 <tr>
                     <th>ID</th>
                     <th>brandId</th>
-                    <th>brandLogoID</th>
                     <th>brandName</th>
+                    <th>brandLogoID</th>
+                    <th>{{ trans('labels.general.actions') }}</th>
                 </tr>
                 </thead>
             </table>
@@ -78,10 +85,11 @@
                 columns: [
                     {data: 'id', name: 'td_brands.id'},
                     {data: 'brandId', name: 'td_brands.brandId'},
+                    {data: 'brandName', name: 'td_brands.brandName'},
                     {data: 'brandLogoID', name: 'td_brands.brandLogoID'},
-                    {data: 'brandName', name: 'td_brands.brandName'}
+                    {data: 'actions', name: 'actions', searchable: false, sortable: false, class: 'text-nowrap'}
                 ],
-                order: [[0, "asc"]],
+                order: [[0, 'asc']],
                 searchDelay: 500
             });
         });

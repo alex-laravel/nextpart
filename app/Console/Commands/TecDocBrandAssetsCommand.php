@@ -4,7 +4,7 @@
 namespace App\Console\Commands;
 
 
-use App\Models\TecDoc\Brand;
+use App\Models\TecDoc\Brand\Brand;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 

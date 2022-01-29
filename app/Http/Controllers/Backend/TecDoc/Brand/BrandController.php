@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers\Backend\TecDoc\Brand;
 
+use App\Http\Controllers\Backend\TecDoc\Brand\Traits\BrandAddressesSynchronize;
+use App\Http\Controllers\Backend\TecDoc\Brand\Traits\BrandAssetsSynchronize;
+use App\Http\Controllers\Backend\TecDoc\Brand\Traits\BrandsSynchronize;
 use App\Http\Controllers\Controller;
-use App\Models\TecDoc\Brand;
+use App\Models\TecDoc\Brand\Brand;
+use App\Models\TecDoc\BrandAddress\BrandAddress;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Artisan;
 
 class BrandController extends Controller
 {
+    use BrandsSynchronize;
+    use BrandAddressesSynchronize;
+    use BrandAssetsSynchronize;
+
     /**
      * @return View
      */
@@ -19,56 +25,17 @@ class BrandController extends Controller
     }
 
     /**
-     * @return RedirectResponse
+     * @param integer $brandAddressId
+     * @return View
      */
-    public function sync()
+    public function show($brandAddressId)
     {
-        Artisan::call('tecdoc:brands');
+        $brandAddress = BrandAddress::find($brandAddressId);
+        $brand = Brand::find($brandAddress->brandId);
 
-        $output = Artisan::output();
-        $output = json_decode($output, true);
-
-        if (!$this->hasSuccessResponse($output)) {
-            \Log::alert('FAIL BRANDS RESPONSE!');
-            return redirect()->back();
-        }
-
-        $output = $this->getResponseDataAsArray($output);
-
-        if (empty($output)) {
-            \Log::alert('EMPTY BRANDS RESPONSE!');
-            return redirect()->back();
-        }
-
-        Brand::truncate();
-        Brand::insert($output);
-
-        \Log::info('BRANDS CREATED!');
-
-        return redirect()->back();
-    }
-
-    /**
-     * @return RedirectResponse
-     */
-    public function syncAssets()
-    {
-        ini_set('max_execution_time', 0);
-
-        $brands = Brand::get();
-
-        foreach ($brands as $brand) {
-            Artisan::call('tecdoc:brand-assets', [
-                'brandId' => $brand->id,
-                'brandLogoId' => $brand->brandLogoID
-            ]);
-
-            $output = Artisan::output();
-            $output === true
-                ? \Log::info('BRANDS CREATED for Brand ID [' . $brand->brandId . ']!')
-                : \Log::alert('FAIL BRAND ASSETS RESPONSE for Brand ID [' . $brand->brandId . ']!');
-        }
-
-        return redirect()->back();
+        return view('backend.tecdoc-brands.show', [
+            'brand' => $brand,
+            'brandAddress' => $brandAddress
+        ]);
     }
 }

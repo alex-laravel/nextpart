@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\TecDoc;
+namespace App\Models\TecDoc\Brand;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
     use HasFactory;
+    use BrandAttribute;
+    use BrandRelationship;
 
     /**
      * @var string

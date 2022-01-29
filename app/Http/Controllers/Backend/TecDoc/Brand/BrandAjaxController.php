@@ -28,6 +28,11 @@ class BrandAjaxController extends Controller
      */
     public function get()
     {
-        return datatables()->of($this->brandRepository->getData())->make(true);
+        return datatables()->of($this->brandRepository->getData())
+            ->addColumn('actions', function ($brand) {
+                return $brand->actionButtons;
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 }

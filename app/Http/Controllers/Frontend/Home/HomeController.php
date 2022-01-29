@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend\Home;
 
 
 use App\Http\Controllers\Frontend\FrontendController;
-use App\Models\TecDoc\Brand;
+use App\Models\TecDoc\Brand\Brand;
 use Illuminate\Contracts\View\View;
 
 class HomeController extends FrontendController

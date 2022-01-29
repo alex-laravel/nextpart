@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend\AutoPart;
 use App\Facades\Garage;
 use App\Helpers\VinCodeHelper;
 use App\Http\Controllers\Frontend\FrontendController;
-use App\Models\TecDoc\Brand;
+use App\Models\TecDoc\Brand\Brand;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;

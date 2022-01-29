@@ -89,15 +89,6 @@ return [
                     'edit' => 'Edit Brand',
                     'view' => 'View Brand',
                 ],
-
-                'brand-addresses' => [
-                    'title' => 'Brand Addresses',
-                    'main' => 'Brand Addresses',
-                    'all' => 'All Brand Addresses',
-                    'create' => 'Create Brand Address',
-                    'edit' => 'Edit Brand Address',
-                    'view' => 'View Brand Address',
-                ]
             ],
 
             'short-cuts' => [

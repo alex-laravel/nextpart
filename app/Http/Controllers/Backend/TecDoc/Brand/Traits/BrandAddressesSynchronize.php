@@ -1,101 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Backend\TecDoc\BrandAddress;
+namespace App\Http\Controllers\Backend\TecDoc\Brand\Traits;
 
-use App\Http\Controllers\Controller;
-use App\Models\TecDoc\Brand;
-use App\Models\TecDoc\BrandAddresses;
-use Illuminate\Contracts\View\View;
+use App\Models\TecDoc\Brand\Brand;
+use App\Models\TecDoc\BrandAddress\BrandAddress;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
-class BrandAddressController extends Controller
+trait BrandAddressesSynchronize
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return View
-     */
-    public function index()
-    {
-        return view('backend.tecdoc-brand-addresses.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\TecDoc\BrandAddresses $brandAddresses
-     * @return \Illuminate\Http\Response
-     */
-    public function show(BrandAddresses $brandAddresses)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\TecDoc\BrandAddresses $brandAddresses
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(BrandAddresses $brandAddresses)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\TecDoc\BrandAddresses $brandAddresses
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, BrandAddresses $brandAddresses)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\TecDoc\BrandAddresses $brandAddresses
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(BrandAddresses $brandAddresses)
-    {
-        //
-    }
-
     /**
      * @return RedirectResponse
      */
-    public function sync()
+    public function syncAddresses()
     {
         ini_set('max_execution_time', 0);
 
-        BrandAddresses::truncate();
+        BrandAddress::truncate();
 
         $brandIds = Brand::get()->pluck('brandId')->toArray();
 
@@ -180,7 +101,7 @@ class BrandAddressController extends Controller
                 \Log::info('BRAND ADDRESS [' . $brandId . '] CREATED!');
             }
 
-            BrandAddresses::insert($output);
+            BrandAddress::insert($output);
         }
 
         return redirect()->back();

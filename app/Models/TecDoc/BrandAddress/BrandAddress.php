@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\TecDoc;
+namespace App\Models\TecDoc\BrandAddress;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BrandAddresses extends Model
+class BrandAddress extends Model
 {
     use HasFactory;
 

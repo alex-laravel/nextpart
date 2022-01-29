@@ -34,6 +34,13 @@
             </a>
         </li>
 
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="{{ route('backend.brands.index') }}">
+                <i class="far fa-building"></i>
+                {{ trans('menus.backend.tecdoc.articles.brands.title') }}
+            </a>
+        </li>
+
         <li class="c-sidebar-nav-dropdown">
             <a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="fas fa-car"></i>
@@ -60,18 +67,6 @@
 {{--                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('backend.direct-articles.index') }}"> {{ trans('menus.backend.tecdoc.direct-articles.title') }}</a></li>--}}
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('backend.direct-article-details.index') }}"> {{ trans('menus.backend.tecdoc.direct-article-details.title') }}</a></li>
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('backend.direct-article-analogs.index') }}"> {{ trans('menus.backend.tecdoc.direct-article-analogs.title') }}</a></li>
-            </ul>
-        </li>
-
-        <li class="c-sidebar-nav-dropdown">
-            <a class="c-sidebar-nav-dropdown-toggle" href="#">
-                <i class="far fa-building"></i>
-                {{ trans('menus.backend.tecdoc.articles.brands.title') }}
-            </a>
-
-            <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('backend.brands.index') }}"> {{ trans('menus.backend.tecdoc.articles.brands.title') }}</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('backend.brand-addresses.index') }}"> {{ trans('menus.backend.tecdoc.articles.brand-addresses.title') }}</a></li>
             </ul>
         </li>
 

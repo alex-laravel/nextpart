@@ -4,7 +4,7 @@
 namespace App\Repositories\Backend\TecDoc;
 
 
-use App\Models\TecDoc\Brand;
+use App\Models\TecDoc\Brand\Brand;
 use App\Repositories\BaseRepository;
 
 class BrandRepository extends BaseRepository
