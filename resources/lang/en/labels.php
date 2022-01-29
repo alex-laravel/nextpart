@@ -16,6 +16,7 @@ return [
     'general' => [
         'actions' => 'Actions',
         'synchronize' => 'Synchronize with TecDoc Catalogue',
+        'synchronize_nova_poshta' => 'Synchronize with Nova Poshta',
 
         'order' => [
             'status' => [

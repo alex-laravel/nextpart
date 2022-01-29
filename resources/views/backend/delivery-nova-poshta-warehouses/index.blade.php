@@ -19,7 +19,7 @@
 
         <div class="card card-accent-success mt-3">
             <div class="card-header">
-                <h4 class="d-inline-block">{{ trans('labels.general.synchronize') }}</h4>
+                <h4 class="d-inline-block">{{ trans('labels.general.synchronize_nova_poshta') }}</h4>
 
                 <div class="float-right">
                     <button class="btn btn-block btn-primary" type="submit">{{ trans('buttons.general.synchronize') }}</button>

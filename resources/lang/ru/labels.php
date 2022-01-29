@@ -16,6 +16,7 @@ return [
     'general' => [
         'actions' => 'Действия',
         'synchronize' => 'Синхронизация с TecDoc Catalogue',
+        'synchronize_nova_poshta' => 'Синхронизация с сервером Новой Почты',
 
         'order' => [
             'status' => [
