@@ -91,8 +91,8 @@ trait ManufacturerAttribute
     public function getIsPopularLabelAttribute()
     {
         return $this->isPopular
-            ? '<span class="badge badge-success">Yes</span>'
-            : '<span class="badge badge-warning">No</span>';
+            ? '<span class="badge badge-success">' . trans('labels.general.yes') . '</span>'
+            : '<span class="badge badge-warning">' . trans('labels.general.no') . '</span>';
     }
 
     /**
@@ -101,7 +101,7 @@ trait ManufacturerAttribute
     public function getIsVisibleLabelAttribute()
     {
         return $this->isVisible
-            ? '<span class="badge badge-success">Yes</span>'
-            : '<span class="badge badge-warning">No</span>';
+            ? '<span class="badge badge-success">' . trans('labels.general.yes') . '</span>'
+            : '<span class="badge badge-warning">' . trans('labels.general.no') . '</span>';
     }
 }

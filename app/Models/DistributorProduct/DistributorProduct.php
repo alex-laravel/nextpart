@@ -11,6 +11,7 @@ class DistributorProduct extends Model
     use HasFactory;
     use DistributorProductAttribute;
     use DistributorProductRelationship;
+    use DistributorProductScope;
 
     /**
      * @var string

@@ -101,7 +101,10 @@ class DistributorProductController extends Controller
                 continue;
             }
 
-            $distributorsList[$distributor->id] = $distributor->title . ' (' . DistributorProduct::whereIn('distributor_storage_id', $distributorStorageIds)->count() . ' ' . trans('strings.backend.distributor_products.products') . ')';
+            $distributorProductsCount = DistributorProduct::whereIn('distributor_storage_id', $distributorStorageIds)->count();
+            $distributorProductsHasTecDocArticleCount = DistributorProduct::whereIn('distributor_storage_id', $distributorStorageIds)->onlyHasTecDocArticle()->count();
+
+            $distributorsList[$distributor->id] = $distributor->title . ' (' . $distributorProductsCount . '/' . $distributorProductsHasTecDocArticleCount . ' ' . trans('strings.backend.distributor_products.products') . ')';
         }
 
         return $distributorsList;

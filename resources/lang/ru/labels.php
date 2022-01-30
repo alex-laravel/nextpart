@@ -14,6 +14,8 @@ return [
     */
 
     'general' => [
+        'yes' => 'Да',
+        'no' => 'Нет',
         'actions' => 'Действия',
         'synchronize' => 'Синхронизация с TecDoc Catalogue',
         'synchronize_nova_poshta' => 'Синхронизация с сервером Новой Почты',
@@ -483,6 +485,7 @@ return [
                 'retail_price' => 'Цена Розничная',
                 'quantity' => 'Наличие',
                 'percent' => 'Наценка',
+                'has_tecdoc_article' => 'Наличие в TecDoc',
                 'created_at' => 'Создано',
                 'updated_at' => 'Последнее обновление',
             ],

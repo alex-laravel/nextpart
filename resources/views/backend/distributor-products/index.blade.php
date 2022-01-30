@@ -88,7 +88,7 @@
                     <th>{{ trans('labels.backend.distributor-products.table.base_price') }}</th>
                     <th>{{ trans('labels.backend.distributor-products.table.percent') }}</th>
                     <th>{{ trans('labels.backend.distributor-products.table.retail_price') }}</th>
-{{--                    <th>{{ trans('labels.general.actions') }}</th>--}}
+                    <th>{{ trans('labels.backend.distributor-products.table.has_tecdoc_article') }}</th>
                 </tr>
                 </thead>
             </table>
@@ -119,8 +119,8 @@
                     {data: 'quantity', name: 'sh_distributor_products.quantity'},
                     {data: 'price', name: 'sh_distributor_products.price'},
                     {data: 'percent', name: 'percent', searchable: false, sortable: false},
-                    {data: 'retail_price', name: 'sh_distributor_products.retail_price', searchable: false, sortable: false}
-                    // {data: 'actions', name: 'actions', searchable: false, sortable: false, 'class': 'text-nowrap'}
+                    {data: 'retail_price', name: 'sh_distributor_products.retail_price', searchable: false, sortable: false},
+                    {data: 'has_tecdoc_article', name: 'sh_distributor_products.has_tecdoc_article'}
                 ],
                 order: [[0, 'asc']],
                 searchDelay: 500

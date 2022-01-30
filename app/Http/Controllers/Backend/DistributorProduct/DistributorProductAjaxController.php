@@ -46,8 +46,8 @@ class DistributorProductAjaxController extends Controller
 
                 return '<label class="badge badge-success">' . $percentage . '%</label>';
             })
-            ->addColumn('actions', function ($distributorProduct) {
-                return $distributorProduct->actionButtons;
+            ->addColumn('has_tecdoc_article', function ($distributorProduct) {
+                return $distributorProduct->hasTecDocArticleLabel;
             })
             ->rawColumns(['percent', 'actions'])
             ->make(true);

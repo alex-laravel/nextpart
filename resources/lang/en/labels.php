@@ -14,6 +14,8 @@ return [
     */
 
     'general' => [
+        'yes' => 'Yes',
+        'no' => 'No',
         'actions' => 'Actions',
         'synchronize' => 'Synchronize with TecDoc Catalogue',
         'synchronize_nova_poshta' => 'Synchronize with Nova Poshta',
@@ -502,6 +504,7 @@ return [
                 'retail_price' => 'Retail Price',
                 'quantity' => 'Quantity',
                 'percent' => 'Percent',
+                'has_tecdoc_article' => 'Availability in TecDoc',
                 'created_at' => 'Created At',
                 'updated_at' => 'Last Update',
             ],
