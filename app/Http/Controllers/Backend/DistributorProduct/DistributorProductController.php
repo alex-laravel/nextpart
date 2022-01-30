@@ -5,28 +5,17 @@ namespace App\Http\Controllers\Backend\DistributorProduct;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\DistributorProduct\DistributorProductImportRequest;
 use App\Http\Requests\Backend\DistributorProduct\DistributorProductSyncRequest;
-use App\Imports\DistributorAutoTechnicsImport;
-use App\Imports\DistributorTehnomirImport;
-use App\Imports\DistributorUniqueTradeImport;
+use App\Imports\DistributorProductImport;
 use App\Models\Distributor\Distributor;
 use App\Models\DistributorProduct\DistributorProduct;
 use App\Models\TecDoc\DirectArticleDetails\DirectArticleDetails;
 use App\Repositories\Backend\DistributorProducts\DistributorProductsRepository;
 use Illuminate\Contracts\View\View;
-
 use Illuminate\Http\RedirectResponse;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Validation\ValidationException;
 
 class DistributorProductController extends Controller
 {
-    const FILE_IMPORT_EXTENSION_CSV = 'csv';
-
-    const DISTRIBUTOR_IMPORT_SLUG_AUTO_TECHNICS = 'auto-technics';
-    const DISTRIBUTOR_IMPORT_SLUG_AUTO_TEXNOMIR_ODESSA = 'texnomir-odessa';
-    const DISTRIBUTOR_IMPORT_SLUG_AUTO_TEXNOMIR_GERMANIYA = 'texnomir-germaniya';
-    const DISTRIBUTOR_IMPORT_SLUG_AUTO_TEXNOMIR_EMIRATY = 'texnomir-emiraty';
-    const DISTRIBUTOR_IMPORT_SLUG_AUTO_UNIQUE_TRADE = 'unique-trade';
-
     /**
      * @var DistributorProductsRepository
      */
@@ -53,6 +42,7 @@ class DistributorProductController extends Controller
     /**
      * @param DistributorProductImportRequest $request
      * @return View
+     * @throws ValidationException
      */
     public function import(DistributorProductImportRequest $request)
     {
@@ -64,23 +54,9 @@ class DistributorProductController extends Controller
         $distributor = Distributor::find($distributorId);
         $distributorStorageIds = $distributor->storages()->orderBy('import_sequence_number')->get()->pluck('id')->toArray();
 
-        switch (true) {
-            case $distributor->import_slug === self::DISTRIBUTOR_IMPORT_SLUG_AUTO_TECHNICS && $distributorFile->getClientOriginalExtension() === self::FILE_IMPORT_EXTENSION_CSV:
-                Excel::import(new DistributorAutoTechnicsImport($distributorStorageIds), $distributorFile, \Maatwebsite\Excel\Excel::CSV);
-                break;
-            case $distributor->import_slug === self::DISTRIBUTOR_IMPORT_SLUG_AUTO_TEXNOMIR_ODESSA && $distributorFile->getClientOriginalExtension() === self::FILE_IMPORT_EXTENSION_CSV:
-            case $distributor->import_slug === self::DISTRIBUTOR_IMPORT_SLUG_AUTO_TEXNOMIR_GERMANIYA && $distributorFile->getClientOriginalExtension() === self::FILE_IMPORT_EXTENSION_CSV:
-            case $distributor->import_slug === self::DISTRIBUTOR_IMPORT_SLUG_AUTO_TEXNOMIR_EMIRATY && $distributorFile->getClientOriginalExtension() === self::FILE_IMPORT_EXTENSION_CSV:
-                Excel::import(new DistributorTehnomirImport($distributorStorageIds), $distributorFile, \Maatwebsite\Excel\Excel::CSV);
-                break;
-            case $distributor->import_slug === self::DISTRIBUTOR_IMPORT_SLUG_AUTO_UNIQUE_TRADE && $distributorFile->getClientOriginalExtension() === self::FILE_IMPORT_EXTENSION_CSV:
-                Excel::import(new DistributorUniqueTradeImport($distributorStorageIds), $distributorFile, \Maatwebsite\Excel\Excel::CSV);
-                break;
-            default:
-                return back()->withFlashDanger(trans('exceptions.backend.distributor_products.import_error'));
-        }
-
-        return back()->withFlashSuccess(trans('alerts.backend.distributor_products.imported'));
+        return DistributorProductImport::handle($distributor, $distributorStorageIds, $distributorFile)
+            ? back()->withFlashSuccess(trans('alerts.backend.distributor_products.imported'))
+            : back()->withFlashDanger(trans('exceptions.backend.distributor_products.import_error'));
     }
 
     /**

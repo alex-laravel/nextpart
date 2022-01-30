@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Repositories\Backend\DistributorProducts;
-
 
 use App\Models\DistributorProduct\DistributorProduct;
 use App\Repositories\BaseRepository;
