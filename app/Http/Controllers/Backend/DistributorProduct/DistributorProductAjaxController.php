@@ -49,7 +49,7 @@ class DistributorProductAjaxController extends Controller
             ->addColumn('has_tecdoc_article', function ($distributorProduct) {
                 return $distributorProduct->hasTecDocArticleLabel;
             })
-            ->rawColumns(['percent', 'actions'])
+            ->rawColumns(['percent', 'has_tecdoc_article'])
             ->make(true);
     }
 }

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Artisan;
 
 class ShortCutController extends TecDocController
 {
+    const EXCLUDED_SHORT_CUT_IDS = [43];
+
     /**
      * @return View
      */
@@ -48,6 +50,10 @@ class ShortCutController extends TecDocController
             foreach ($output as &$shortCut) {
                 $shortCut['linkingTargetType'] = $linkingTargetType;
             }
+
+            $output = array_filter($output, function ($v, $k) {
+                return !in_array($v['shortCutId'], self::EXCLUDED_SHORT_CUT_IDS);
+            }, ARRAY_FILTER_USE_BOTH);
 
             ShortCut::insert($output);
         }

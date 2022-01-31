@@ -15,7 +15,7 @@ return [
 
     'backend' => [
         'dashboard' => [
-            'title' => 'Dashboard'
+            'title' => 'Дашборд'
         ],
 
         'header' => [
