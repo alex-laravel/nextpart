@@ -98,16 +98,12 @@ return [
                 'title' => 'Общие Статьи',
             ],
 
-            'direct-articles' => [
+            'direct-article-details' => [
                 'title' => 'Запчасти',
             ],
 
-            'direct-article-details' => [
-                'title' => 'Детализация Запчастей',
-            ],
-
             'direct-article-analogs' => [
-                'title' => 'Аналоги Запчасти',
+                'title' => 'Запчасти - Аналоги',
             ],
 
             'version' => [

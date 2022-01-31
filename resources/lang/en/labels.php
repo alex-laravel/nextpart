@@ -310,28 +310,6 @@ return [
             ],
         ],
 
-        'direct-articles' => [
-            'management' => 'Direct Articles Management',
-            'list' => 'List of Direct Articles',
-            'create' => 'Create Direct Article',
-            'edit' => 'Edit Direct Article',
-            'view' => 'View Direct Article',
-            'table' => [
-
-            ],
-            'tabs' => [
-                'titles' => [
-                    'overview' => 'Overview',
-                ],
-
-                'content' => [
-                    'overview' => [
-
-                    ],
-                ],
-            ],
-        ],
-
         'direct-article-details' => [
             'management' => 'Direct Article Details Management',
             'list' => 'List of Direct Article Details',

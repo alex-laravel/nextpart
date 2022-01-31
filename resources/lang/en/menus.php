@@ -103,10 +103,6 @@ return [
                 'title' => 'Generic Articles',
             ],
 
-            'direct-articles' => [
-                'title' => 'Direct Articles',
-            ],
-
             'direct-article-details' => [
                 'title' => 'Direct Article Details',
             ],

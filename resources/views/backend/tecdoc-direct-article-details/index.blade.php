@@ -19,7 +19,7 @@
             <h4 class="d-inline-block">{{ trans('labels.backend.direct-article-details.list') }}</h4>
 
             <div class="float-right">
-                @include('backend.tecdoc-direct-articles.partials.header-buttons')
+                @include('backend.tecdoc-direct-article-details.partials.header-buttons')
             </div>
         </div>
 
@@ -30,9 +30,19 @@
                     <th>ID</th>
                     <th>articleId</th>
                     <th>articleName</th>
-{{--                    <th>designation</th>--}}
-{{--                    <th>masterDesignation</th>--}}
-{{--                    <th>usageDesignation</th>--}}
+                    <th>articleNo</th>
+                    <th>articleState</th>
+                    <th>articleStateName</th>
+                    <th>brandName</th>
+{{--                    <th>brandNo</th>--}}
+{{--                    <th>genericArticleId</th>--}}
+                    <th>hasDocuments</th>
+{{--                    <th>hasMarkLink</th>--}}
+{{--                    <th>hasPartList</th>--}}
+{{--                    <th>hasVehicleLink</th>--}}
+{{--                    <th>mainArticle</th>--}}
+{{--                    <th>replacedByNumber</th>--}}
+{{--                    <th>replacedNumber</th>--}}
                 </tr>
                 </thead>
             </table>
@@ -56,7 +66,20 @@
                 columns: [
                     {data: 'id', name: 'td_direct_article_details.id'},
                     {data: 'articleId', name: 'td_direct_article_details.articleId'},
-                    {data: 'articleName', name: 'td_direct_article_details.articleName'}
+                    {data: 'articleName', name: 'td_direct_article_details.articleName'},
+                    {data: 'articleNo', name: 'td_direct_article_details.articleNo'},
+                    {data: 'articleState', name: 'td_direct_article_details.articleState'},
+                    {data: 'articleStateName', name: 'td_direct_article_details.articleStateName'},
+                    {data: 'brandName', name: 'td_direct_article_details.brandName'},
+                    // {data: 'brandNo', name: 'td_direct_article_details.brandNo'},
+                    // {data: 'genericArticleId', name: 'td_direct_article_details.genericArticleId'},
+                    {data: 'hasDocuments', name: 'td_direct_article_details.hasDocuments'}
+                    // {data: 'hasMarkLink', name: 'td_direct_article_details.hasMarkLink'},
+                    // {data: 'hasPartList', name: 'td_direct_article_details.hasPartList'},
+                    // {data: 'hasVehicleLink', name: 'td_direct_article_details.hasVehicleLink'},
+                    // {data: 'mainArticle', name: 'td_direct_article_details.mainArticle'},
+                    // {data: 'replacedByNumber', name: 'td_direct_article_details.replacedByNumber'},
+                    // {data: 'replacedNumber', name: 'td_direct_article_details.replacedNumber'}
                 ],
                 order: [[0, "asc"]],
                 searchDelay: 500

@@ -64,7 +64,6 @@
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('backend.short-cuts.index') }}"> {{ trans('menus.backend.tecdoc.short-cuts.title') }}</a></li>
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('backend.assembly-groups.index') }}"> {{ trans('menus.backend.tecdoc.assembly-groups.title') }}</a></li>
 {{--                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('backend.generic-articles.index') }}"> {{ trans('menus.backend.tecdoc.generic-articles.title') }}</a></li>--}}
-{{--                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('backend.direct-articles.index') }}"> {{ trans('menus.backend.tecdoc.direct-articles.title') }}</a></li>--}}
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('backend.direct-article-details.index') }}"> {{ trans('menus.backend.tecdoc.direct-article-details.title') }}</a></li>
                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('backend.direct-article-analogs.index') }}"> {{ trans('menus.backend.tecdoc.direct-article-analogs.title') }}</a></li>
             </ul>
