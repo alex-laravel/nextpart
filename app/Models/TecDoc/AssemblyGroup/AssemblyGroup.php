@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AssemblyGroup extends Model
 {
     use HasFactory;
+    use AssemblyGroupScope;
 
     /**
      * @var bool

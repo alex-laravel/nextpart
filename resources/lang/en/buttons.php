@@ -26,6 +26,7 @@ return [
         'synchronize_vehicles' => 'Synchronize Vehicles',
         'synchronize_vehicles_assets' => 'Synchronize Vehicles - Assets',
         'synchronize_vehicles_details' => 'Synchronize Vehicles - Details',
+        'synchronize_direct_articles' => 'Synchronize Direct Articles',
         'synchronize_assets' => 'Synchronize Assets',
         'synchronize_addresses' => 'Synchronize Addresses',
         'cancel' => 'Cancel',

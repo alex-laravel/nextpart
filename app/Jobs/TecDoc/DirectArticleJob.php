@@ -2,7 +2,6 @@
 
 namespace App\Jobs\TecDoc;
 
-use App\Models\TecDoc\AssemblyGroup\AssemblyGroup;
 use App\Models\TecDoc\DirectArticle\DirectArticle;
 use App\Models\TecDoc\Vehicle\Vehicle;
 use Illuminate\Bus\Queueable;
@@ -27,144 +26,100 @@ class DirectArticleJob implements ShouldQueue
     private $vehicleId;
 
     /**
+     * @var string
+     */
+    private $vehicleType;
+
+    /**
+     * @var integer
+     */
+    private $assemblyGroupId;
+
+    /**
      *
      * @param integer $vehicleId
+     * @param string $vehicleType
+     * @param integer $assemblyGroupId
      * @return void
      */
-    public function __construct($vehicleId)
+    public function __construct($vehicleId, $vehicleType, $assemblyGroupId)
     {
-        $this->vehicleId = $vehicleId;
+        $this->vehicleId = (int)$vehicleId;
+        $this->vehicleType = $vehicleType;
+        $this->assemblyGroupId = (int)$assemblyGroupId;
     }
 
     /**
-     * Execute the job.
-     *
-     * @return void
+     * @return boolean
+     * @throws \Exception
      */
     public function handle()
     {
         ini_set('max_execution_time', 0);
 
         \Log::debug('===========================================================================');
-        \Log::debug('STARTED QUEUE FOR VEHICLE ID [' . $this->vehicleId . ']');
+        \Log::debug('STARTED QUEUE FOR VEHICLE ID [' . $this->vehicleId . '] AND VEHICLE TYPE [' . $this->vehicleType . '] AND ASSEMBLY ID [' . $this->assemblyGroupId . ']');
         \Log::debug('===========================================================================');
 
-        $assemblyGroups = AssemblyGroup::where('hasChilds', false)->orderBy('assemblyGroupNodeId')->get();
-
-        $assemblyGroupsUnique = [];
-        $directArticlesCollection = [];
-
-        foreach ($assemblyGroups as $assemblyGroup) {
-            $assemblyGroupsUnique[$assemblyGroup->assemblyGroupNodeId] = $assemblyGroup;
-        }
-
-        $vehicle = Vehicle::find($this->vehicleId);
-
-        $this->markVehicleAsSynchronized($vehicle);
-
-        foreach ($assemblyGroupsUnique as $assemblyGroupUnique) {
-            if ($vehicle->carType === 'P') {
-                $vehicle->carType = 'V';
-            }
-
-            if ($vehicle->carType !== $assemblyGroupUnique->linkingTargetType) {
-                continue;
-            }
-
-//            Artisan::call('tecdoc:direct-articles', [
-//                'linkingTargetId' => $vehicle->carId,
-//                'linkingTargetType' => $assemblyGroupUnique->linkingTargetType,
-//                'assemblyGroupId' => $assemblyGroupUnique->assemblyGroupNodeId,
-//            ]);
-//
-//            $output = Artisan::output();
+        try {
+            $output = $this->callDirectArticlesApi();
+            $output = json_decode($output, true);
+        } catch (\Exception $exception) {
+            \Log::debug('==================================================================================================================================================================================================================================');
+            \Log::debug('CATCH EXCEPTION 1 DIRECT ARTICLES RESPONSE FOR linkingTargetId [' . $this->vehicleId . '] AND linkingTargetType [' . $this->vehicleType . '] AND assemblyGroupId [' . $this->assemblyGroupId . ']!');
+            \Log::debug('==================================================================================================================================================================================================================================');
 
             try {
-                $output = $this->callDirectArticlesApi($vehicle->carId, $assemblyGroupUnique->linkingTargetType, $assemblyGroupUnique->assemblyGroupNodeId);
+                sleep(1);
+                $output = $this->callDirectArticlesApi();
                 $output = json_decode($output, true);
             } catch (\Exception $exception) {
                 \Log::debug('==================================================================================================================================================================================================================================');
-                \Log::debug('CATCH EXCEPTION 1 DIRECT ARTICLES RESPONSE FOR linkingTargetId [' . $vehicle->carId . '] AND linkingTargetType [' . $assemblyGroupUnique->linkingTargetType . '] AND assemblyGroupId [' . $assemblyGroupUnique->assemblyGroupNodeId . ']!');
+                \Log::debug('CATCH EXCEPTION 2 DIRECT ARTICLES RESPONSE FOR linkingTargetId [' . $this->vehicleId . '] AND linkingTargetType [' . $this->vehicleType . '] AND assemblyGroupId [' . $this->assemblyGroupId . ']!');
                 \Log::debug('==================================================================================================================================================================================================================================');
 
                 try {
                     sleep(1);
-                    $output = $this->callDirectArticlesApi($vehicle->carId, $assemblyGroupUnique->linkingTargetType, $assemblyGroupUnique->assemblyGroupNodeId);
+                    $output = $this->callDirectArticlesApi();
                     $output = json_decode($output, true);
                 } catch (\Exception $exception) {
                     \Log::debug('==================================================================================================================================================================================================================================');
-                    \Log::debug('CATCH EXCEPTION 2 DIRECT ARTICLES RESPONSE FOR linkingTargetId [' . $vehicle->carId . '] AND linkingTargetType [' . $assemblyGroupUnique->linkingTargetType . '] AND assemblyGroupId [' . $assemblyGroupUnique->assemblyGroupNodeId . ']!');
+                    \Log::debug('CATCH EXCEPTION 3 DIRECT ARTICLES RESPONSE FOR linkingTargetId [' . $this->vehicleId . '] AND linkingTargetType [' . $this->vehicleType . '] AND assemblyGroupId [' . $this->assemblyGroupId . ']!');
                     \Log::debug('==================================================================================================================================================================================================================================');
 
-                    try {
-                        sleep(1);
-                        $output = $this->callDirectArticlesApi($vehicle->carId, $assemblyGroupUnique->linkingTargetType, $assemblyGroupUnique->assemblyGroupNodeId);
-                        $output = json_decode($output, true);
-                    } catch (\Exception $exception) {
-                        \Log::debug('==================================================================================================================================================================================================================================');
-                        \Log::debug('CATCH EXCEPTION 3 DIRECT ARTICLES RESPONSE FOR linkingTargetId [' . $vehicle->carId . '] AND linkingTargetType [' . $assemblyGroupUnique->linkingTargetType . '] AND assemblyGroupId [' . $assemblyGroupUnique->assemblyGroupNodeId . ']!');
-                        \Log::debug('==================================================================================================================================================================================================================================');
-
-                        throw $exception;
-                    }
+                    throw $exception;
                 }
             }
-
-
-            if (!$this->hasSuccessResponse($output)) {
-                \Log::debug('FAIL DIRECT ARTICLES RESPONSE FOR linkingTargetId [' . $vehicle->carId . '] AND linkingTargetType [' . $assemblyGroupUnique->linkingTargetType . '] AND assemblyGroupId [' . $assemblyGroupUnique->assemblyGroupNodeId . ']!');
-                \Log::debug($output);
-                continue;
-            }
-
-            $output = $this->getResponseDataAsArray($output);
-
-            if (empty($output)) {
-                continue;
-            }
-
-            foreach ($output as &$article) {
-                $article['carId'] = $vehicle->carId;
-                $article['assemblyGroupNodeId'] = $assemblyGroupUnique->assemblyGroupNodeId;
-                $article['linkingTargetType'] = $assemblyGroupUnique->linkingTargetType;
-
-                $directArticlesCollection[] = $article;
-
-            }
-
-            \Log::info('DIRECT ARTICLES FOR linkingTargetId [' . $vehicle->carId . '] AND linkingTargetType [' . $assemblyGroupUnique->linkingTargetType . '] AND assemblyGroupId [' . $assemblyGroupUnique->assemblyGroupNodeId . '] CREATED!');
-
-            if (count($directArticlesCollection) > 500) {
-                DirectArticle::insert($directArticlesCollection);
-                $directArticlesCollection = [];
-            }
         }
 
-        if (count($directArticlesCollection) > 0) {
-            DirectArticle::insert($directArticlesCollection);
-            $directArticlesCollection = [];
+        if (!$this->hasSuccessResponse($output)) {
+            \Log::debug('FAIL DIRECT ARTICLES RESPONSE FOR linkingTargetId [' . $this->vehicleId . '] AND linkingTargetType [' . $this->vehicleType . '] AND assemblyGroupId [' . $this->assemblyGroupId . ']!');
+            \Log::debug($output);
+            throw new \Exception(json_encode($output));
         }
 
-        $this->markVehicleAsSynchronized($vehicle, now());
+        $output = $this->getResponseDataAsArray($output);
 
-        unset($assemblyGroups);
-        unset($assemblyGroupsUnique);
-        unset($vehicle);
-        unset($directArticlesCollection);
+        if (empty($output)) {
+            \Log::debug('EMPTY DIRECT ARTICLES RESPONSE FOR linkingTargetId [' . $this->vehicleId . '] AND linkingTargetType [' . $this->vehicleType . '] AND assemblyGroupId [' . $this->assemblyGroupId . ']!');
+            return false;
+        }
+
+        foreach ($output as &$article) {
+            $article['carId'] = $this->vehicleId;
+            $article['linkingTargetType'] = $this->vehicleType;
+            $article['assemblyGroupNodeId'] = $this->assemblyGroupId;
+        }
+
+        DirectArticle::insert($output);
+
+        \Log::info('DIRECT ARTICLES FOR linkingTargetId [' . $this->vehicleId . '] AND linkingTargetType [' . $this->vehicleType . '] AND assemblyGroupId [' . $this->assemblyGroupId . '] CREATED!');
 
         \Log::debug('===========================================================================');
         \Log::debug('FINISHED QUEUE FOR VEHICLE ID [' . $this->vehicleId . ']');
         \Log::debug('===========================================================================');
-    }
 
-    /**
-     * @param Vehicle $vehicle
-     * @param \DateTime $date
-     */
-    private function markVehicleAsSynchronized($vehicle, $date = null)
-    {
-        $vehicle->synchronizedArticlesAt = $date;
-        $vehicle->save();
+        return true;
     }
 
     /**
@@ -203,12 +158,15 @@ class DirectArticleJob implements ShouldQueue
         return is_array($response['data']) && array_key_exists('array', $response['data']) ? $response['data']['array'] : [];
     }
 
-    private function callDirectArticlesApi($carId, $linkingTargetType, $assemblyGroupNodeId)
+    /**
+     * @return string
+     */
+    private function callDirectArticlesApi()
     {
         Artisan::call('tecdoc:direct-articles', [
-            'linkingTargetId' => $carId,
-            'linkingTargetType' => $linkingTargetType,
-            'assemblyGroupId' => $assemblyGroupNodeId,
+            'linkingTargetId' => $this->vehicleId,
+            'linkingTargetType' => $this->vehicleType,
+            'assemblyGroupId' => $this->assemblyGroupId,
         ]);
 
         return Artisan::output();

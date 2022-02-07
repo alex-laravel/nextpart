@@ -26,6 +26,7 @@ return [
         'synchronize_vehicles' => 'Синхронизировать Тр. Средства',
         'synchronize_vehicles_assets' => 'Синхронизировать Тр. Средства - Ассеты',
         'synchronize_vehicles_details' => 'Синхронизировать Тр. Средства - Детали',
+        'synchronize_direct_articles' => 'Синхронизировать Запчасти',
         'synchronize_assets' => 'Синхронизировать Ассеты',
         'synchronize_addresses' => 'Синхронизировать Адреса',
         'cancel' => 'Отменить',
