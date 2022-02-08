@@ -11,6 +11,11 @@ class DirectArticleDetails extends Model
     use DirectArticleDetailsRelationship;
 
     /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * @var string
      */
     protected $table = 'td_direct_article_details';

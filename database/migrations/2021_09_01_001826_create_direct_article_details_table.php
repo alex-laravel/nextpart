@@ -53,8 +53,6 @@ class CreateDirectArticleDetailsTable extends Migration
             $table->json('usageNumbers2');
             $table->json('replacedByNumber');
             $table->json('replacedNumber');
-            $table->timestamps();
-
             $table->index('articleId');
             $table->index('articleNo');
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\TecDoc\Vehicle;
 
 use App\Http\Controllers\Backend\TecDoc\TecDocController;
+use App\Http\Controllers\Backend\TecDoc\Vehicle\Traits\VehicleDirectArticleDetailsSync;
 use App\Http\Controllers\Backend\TecDoc\Vehicle\Traits\VehicleDirectArticleSync;
 use App\Http\Requests\Backend\Vehicle\VehicleSynchronizeRequest;
 use App\Models\TecDoc\Country;
@@ -17,6 +18,7 @@ use Illuminate\Support\Str;
 class VehicleController extends TecDocController
 {
     use VehicleDirectArticleSync;
+    use VehicleDirectArticleDetailsSync;
 
     /**
      * @return View

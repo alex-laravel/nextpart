@@ -42,6 +42,7 @@ class TecDocDirectArticlesAnalogsCommand extends TecDocCommand
                 'articleCountry' => config('tecdoc.api.country'),
                 'articleNumber' => $articleNumber,
                 'numberType' => 3,
+//                'numberType' => 5,
                 'searchExact' => true,
             ]
         ]);

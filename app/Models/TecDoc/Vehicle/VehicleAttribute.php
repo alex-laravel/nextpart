@@ -34,6 +34,7 @@ trait VehicleAttribute
                     <button class="btn btn-sm btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . trans('buttons.general.synchronize') . '</button>
                     <div class="dropdown-menu">
                         ' . $this->getDirectArticlesSynchronizeButtonAttribute() . '
+                        ' . $this->getDirectArticleDetailsSynchronizeButtonAttribute() . '
                     </div>';
     }
 
@@ -45,6 +46,17 @@ trait VehicleAttribute
         return '<form class="d-inline" action="' . route('backend.vehicles.direct-articles.sync', $this->carId) . '" method="post">
             <input type="hidden" name="_token" value="' . csrf_token() . '">
             <button class="dropdown-item" type="submit">' . trans('buttons.general.synchronize_direct_articles') . '</button>
+            </form>';
+    }
+
+    /**
+     * @return string
+     */
+    public function getDirectArticleDetailsSynchronizeButtonAttribute()
+    {
+        return '<form class="d-inline" action="' . route('backend.vehicles.direct-article-details.sync', $this->carId) . '" method="post">
+            <input type="hidden" name="_token" value="' . csrf_token() . '">
+            <button class="dropdown-item" type="submit">' . trans('buttons.general.synchronize_direct_article_details') . '</button>
             </form>';
     }
 }
