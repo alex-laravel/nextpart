@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Backend\TecDoc\Vehicle\Traits;
 
-use App\Jobs\TecDoc\DirectArticleJob;
 use App\Models\TecDoc\AssemblyGroup\AssemblyGroup;
 use App\Models\TecDoc\DirectArticle\DirectArticle;
 use App\Models\TecDoc\DirectArticleRegistry\DirectArticleRegistry;

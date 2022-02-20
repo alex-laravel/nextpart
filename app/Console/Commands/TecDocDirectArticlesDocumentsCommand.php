@@ -13,7 +13,7 @@ class TecDocDirectArticlesDocumentsCommand extends TecDocCommand
     /**
      * @var string
      */
-    protected $signature = 'tecdoc:direct-articles-documents {articleId} {articleDocId} {articleDocTypeId} {--thumbnail}';
+    protected $signature = 'tecdoc:direct-articles-documents {vehicleId} {articleId} {articleDocId} {articleDocTypeId} {--thumbnail}';
 
     /**
      * @var string
@@ -35,6 +35,7 @@ class TecDocDirectArticlesDocumentsCommand extends TecDocCommand
     {
         \Log::debug('CALL COMMAND [tecdoc:direct-articles-documents]');
 
+        $vehicleId = (int)$this->argument('vehicleId');
         $articleId = (int)$this->argument('articleId');
         $articleDocId = $this->argument('articleDocId');
         $articleDocTypeId = (int)$this->argument('articleDocTypeId');
@@ -54,7 +55,7 @@ class TecDocDirectArticlesDocumentsCommand extends TecDocCommand
         }
 
         if ($responseDocument->ok()) {
-            $documentName = $this->generateDirectArticleDocumentName($responseDocument->header('Content-Type'), $articleId . $articleDocId . $thumbnail);
+            $documentName = $this->generateDirectArticleDocumentName($responseDocument->header('Content-Type'), $vehicleId, $articleId . $articleDocId . $thumbnail);
 
             DirectArticleDocument::create([
                 'articleId' => $articleId,
@@ -80,7 +81,16 @@ class TecDocDirectArticlesDocumentsCommand extends TecDocCommand
         $extensions = [
             'image/gif' => 'gif',
             'image/jpeg' => 'jpg',
-            'image/png' => 'png'
+            'image/png' => 'png',
+            'audio/wav' => 'wav',
+            'audio/mp3' => 'mp3',
+            'audio/mp4' => 'mp4',
+            'audio/mpeg' => 'mpeg',
+            'application/pdf' => 'pdf',
+            'application/msword' => 'doc',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'docx',
+            'application/vnd.ms-excel' => 'xls',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'xlsx',
         ];
 
         return array_key_exists($mimeType, $extensions) ? $extensions[$mimeType] : 'tmp';
@@ -89,12 +99,12 @@ class TecDocDirectArticlesDocumentsCommand extends TecDocCommand
 
     /**
      * @param string $header
+     * @param integer $vehicleId
      * @param string $name
      * @return string
      */
-    private function generateDirectArticleDocumentName($header, $name)
+    private function generateDirectArticleDocumentName($header, $vehicleId, $name)
     {
-        return md5($name) . '.' . $this->getExtension($header);
-
+        return $vehicleId . '/' . md5($name) . '.' . $this->getExtension($header);
     }
 }

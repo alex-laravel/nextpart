@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\TecDoc\Vehicle;
 
 use App\Http\Controllers\Backend\TecDoc\TecDocController;
+use App\Http\Controllers\Backend\TecDoc\Vehicle\Traits\VehicleDirectArticleAssetsSync;
 use App\Http\Controllers\Backend\TecDoc\Vehicle\Traits\VehicleDirectArticleDetailsSync;
 use App\Http\Controllers\Backend\TecDoc\Vehicle\Traits\VehicleDirectArticleSync;
 use App\Http\Requests\Backend\Vehicle\VehicleSynchronizeRequest;
@@ -19,6 +20,7 @@ class VehicleController extends TecDocController
 {
     use VehicleDirectArticleSync;
     use VehicleDirectArticleDetailsSync;
+    use VehicleDirectArticleAssetsSync;
 
     /**
      * @return View

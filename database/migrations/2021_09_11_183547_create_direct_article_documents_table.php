@@ -18,7 +18,7 @@ class CreateDirectArticleDocumentsTable extends Migration
             $table->unsignedInteger('articleId');
             $table->string('articleDocId', 150);
             $table->unsignedSmallInteger('articleDocTypeId');
-            $table->string('assetDocumentName', 36);
+            $table->string('assetDocumentName', 150);
             $table->boolean('isThumbnail');
             $table->timestamps();
             $table->index('articleId');
