@@ -36,6 +36,7 @@ trait VehicleAttribute
                         ' . $this->getDirectArticlesSynchronizeButtonAttribute() . '
                         ' . $this->getDirectArticleDetailsSynchronizeButtonAttribute() . '
                         ' . $this->getDirectArticleAssetsSynchronizeButtonAttribute() . '
+                        ' . $this->getDirectArticleAnalogsSynchronizeButtonAttribute() . '
                     </div>';
     }
 
@@ -69,6 +70,17 @@ trait VehicleAttribute
         return '<form class="d-inline" action="' . route('backend.vehicles.direct-article-assets.sync', $this->carId) . '" method="post">
             <input type="hidden" name="_token" value="' . csrf_token() . '">
             <button class="dropdown-item" type="submit">' . trans('buttons.general.synchronize_direct_article_assets') . '</button>
+            </form>';
+    }
+
+    /**
+     * @return string
+     */
+    public function getDirectArticleAnalogsSynchronizeButtonAttribute()
+    {
+        return '<form class="d-inline" action="' . route('backend.vehicles.direct-article-analogs.sync', $this->carId) . '" method="post">
+            <input type="hidden" name="_token" value="' . csrf_token() . '">
+            <button class="dropdown-item" type="submit">' . trans('buttons.general.synchronize_direct_article_analogs') . '</button>
             </form>';
     }
 }

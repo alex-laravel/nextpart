@@ -29,6 +29,7 @@ return [
         'synchronize_direct_articles' => 'Synchronize Direct Articles',
         'synchronize_direct_article_details' => 'Synchronize Direct Article Details',
         'synchronize_direct_article_assets' => 'Synchronize Direct Article Assets',
+        'synchronize_direct_article_analogs' => 'Synchronize Direct Article Analogs',
         'synchronize_assets' => 'Synchronize Assets',
         'synchronize_addresses' => 'Synchronize Addresses',
         'cancel' => 'Cancel',

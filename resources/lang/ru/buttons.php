@@ -29,6 +29,7 @@ return [
         'synchronize_direct_articles' => 'Синхронизировать Запчасти',
         'synchronize_direct_article_details' => 'Синхронизировать Запчасти - Подробности',
         'synchronize_direct_article_assets' => 'Синхронизировать Запчасти - Ассеты',
+        'synchronize_direct_article_analogs' => 'Синхронизировать Запчасти - Аналоги',
         'synchronize_assets' => 'Синхронизировать Ассеты',
         'synchronize_addresses' => 'Синхронизировать Адреса',
         'cancel' => 'Отменить',
